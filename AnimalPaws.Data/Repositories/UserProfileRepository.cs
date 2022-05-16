@@ -30,9 +30,16 @@ namespace AnimalPaws.Data.Repositories
             return await db.QueryAsync<UserProfile>(sql, new { });
         }
 
-        public Task<bool> CreateProfileUser(UserProfile userProfile)
+        public async Task<bool> CreateProfileUser(UserProfile userProfile)
         {
-            throw new NotImplementedException();
+            var db = DbConnection();
+
+            var sql = @"
+                        INSERT INTO USER (first_name, middle_name, surname, last_name, sex, email, password, phone_number,  department, city)
+                         VALUES (@first_name, @middle_name, @surname, @last_name, @sex, @email, @password, @phone_number,  @department, @city)";
+            var result = await db.ExecuteAsync(sql, new { user.first_name, user.middle_name, user.surname, user.last_name, user.sex, user.email, user.password, user.phone_number, user.department, user.city });
+
+            return result > 0;
         }
 
         public Task<bool> UpdateProfileUser(UserProfile userProfile)
