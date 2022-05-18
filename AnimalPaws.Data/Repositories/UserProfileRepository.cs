@@ -35,9 +35,9 @@ namespace AnimalPaws.Data.Repositories
             var db = DbConnection();
 
             var sql = @"
-                        INSERT INTO USER (first_name, middle_name, surname, last_name, sex, email, password, phone_number,  department, city)
-                         VALUES (@first_name, @middle_name, @surname, @last_name, @sex, @email, @password, @phone_number,  @department, @city)";
-            var result = await db.ExecuteAsync(sql, new { user.first_name, user.middle_name, user.surname, user.last_name, user.sex, user.email, user.password, user.phone_number, user.department, user.city });
+                        INSERT INTO USER (username, picture, biography, notification_id, pet_id)
+                         VALUES (@username, @picture, @biography, @notification_id, @pet_id)";
+            var result = await db.ExecuteAsync(sql, new { userProfile.username, userProfile.picture, userProfile.biography, userProfile.notification_id, userProfile.pet_id});
 
             return result > 0;
         }
